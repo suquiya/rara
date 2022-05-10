@@ -1,0 +1,11 @@
+[package]
+name = "rara"
+version = "0.1.0"
+authors = ["suquiya"]
+description = "Rara is a password generator."
+license="MIT"
+categories=["command-line-utilities"]
+edition = "2021"
+
+
+[dependencies]
