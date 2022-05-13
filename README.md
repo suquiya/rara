@@ -1,6 +1,6 @@
 # rara
 
-Rara is a password generator. This is an also sample project using combu.
+Rara is a password generator. This is an also sample project using [combu](https://github.com/suquiya/combu).
 
 # CONTRIBUTING
 

@@ -1,5 +1,5 @@
 [package]
-name = "rara"
+name = "rurara"
 version = "0.1.0"
 authors = ["suquiya"]
 description = "Rara is a password generator."
@@ -9,3 +9,5 @@ edition = "2021"
 
 
 [dependencies]
+combu = "1.1.8"
+rand = "0.8.5"

@@ -23,7 +23,7 @@ We use github to host code, to track issues and feature requests, as well as acc
 
 ## Report bugs using Github's issues
 
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/suquiya/combu/issues/new) it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/suquiya/rara/issues/new) it's that easy!
 
 ## Use a Consistent Coding Style
 
