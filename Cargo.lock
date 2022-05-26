@@ -10,9 +10,9 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "combu"
-version = "1.1.8"
+version = "1.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "753105db670ab66feb30c8a2b0e99789f43b5068d369966336bda55391c41728"
+checksum = "6ce980339c6137cd1fee1e39cc3b80076959be8e46fb9bc590f3a59c7a78edc5"
 
 [[package]]
 name = "getrandom"
@@ -68,7 +68,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "rurara"
+name = "rara"
 version = "0.1.0"
 dependencies = [
  "combu",
