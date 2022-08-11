@@ -1,7 +1,10 @@
 use combu::{
     action_result, alias, checks, commands, copyright, crate_authors, crate_description,
-    crate_name, crate_version, flags, license, result, Command, Context, Flag, FlagValue,
+    crate_name, crate_version, flags, license, result, vector::flag::FlagSearch, Command, Context,
+    Flag,
 };
+
+use crate::pwgen;
 
 pub fn new() -> Command {
     Command::with_all_field(
@@ -20,18 +23,18 @@ pub fn new() -> Command {
                 [number]=>[>int?7,="password number option. default: 7",-n]
             ],
             [
-                [include]=>[>bool?"default",="chooses string type password include. Types are alphabet,number,symbol and default, that can combinate by '+'. default: alphabet+number+symbol",-i]
+                [include]=>[>String?"d",="chooses chars indicate type password include. Types are alphabet(a),number(n),symbol(s) and default(d). You can specify multiple chars(ex: an). default=ans",-i]
             ],
             [
                 [exclude]=>[
                     >String?"",
-                    ="Password will generate without chars that is specidied by this flag"
+                    ="Password will generate without chars that is specidied by this flag",-e
                 ]
             ],
             [
                 [custom]=>[
                     >String?"",
-                    ="Password will generate only chars that is specidied by this flag. this option is inputted, include option is disabled. default: disable",-c,-m,--cstm
+                    ="Password will generate with only chars that is specidied by this flag. this option is inputted, include option is disabled. default: disable",-c,-m,--cstm
                 ]
             ]
         ],
@@ -44,13 +47,61 @@ pub fn new() -> Command {
 
 fn act(cmd: Command, ctx: Context) -> action_result!() {
     checks!(cmd, ctx, [error, help, version, license]);
-    parse_ctx_and_run(cmd, ctx)
+    result!(cmd, ctx)
 }
 
-fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
+pub fn parse_ctx_and_run(cmd: Command, ctx: Context) {
     let l = {
-        let FlagValue::Int(a) = ctx.get_flag_value_of("length", &cmd).unwrap();
+        let lf = cmd.l_flags.find("lenght").unwrap();
+        match ctx
+            .get_flag_value_of(&lf.name, &cmd)
+            .unwrap()
+            .get_int_unwrap()
+        {
+            x if x > 0 => x,
+            _ => lf.default_value.get_int_unwrap(),
+        }
+    } as usize;
+    let n = {
+        let nf = cmd.l_flags.find("number").unwrap();
+        match ctx
+            .get_flag_value_of(&nf.name, &cmd)
+            .unwrap()
+            .get_int_unwrap()
+        {
+            x if x > 0 => x,
+            _ => nf.default_value.get_int_unwrap(),
+        }
+    } as usize;
+    let include_str = match ctx.get_flag_value_of("custom", &cmd).unwrap().get_string() {
+        x if x.is_empty() => {
+            let include = ctx.get_flag_value_of("include", &cmd).unwrap().get_string();
+            if include.contains('d') {
+                String::from(pwgen::str_list::get_alphabets())
+                    + pwgen::str_list::get_numbers()
+                    + pwgen::str_list::get_symbols()
+            } else {
+                let mut str = String::new();
+                if include.contains('a') {
+                    str = str + pwgen::str_list::get_alphabets();
+                }
+                if include.contains('n') {
+                    str = str + pwgen::str_list::get_numbers();
+                }
+                if include.contains('s') {
+                    str = str + pwgen::str_list::get_symbols();
+                }
+                str
+            }
+        }
+        x => x,
     };
 
-    result!(cmd, ctx)
+    let include_chars: Vec<char> = include_str.chars().collect();
+
+    let password_list = pwgen::pwgen(l, n, &include_chars);
+
+    for password in password_list {
+        println!("{}\r\n", password);
+    }
 }
