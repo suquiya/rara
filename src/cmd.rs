@@ -1,7 +1,7 @@
 use combu::{
     action_result, alias, checks, commands, copyright, crate_authors, crate_description,
-    crate_name, crate_version, flags, license, result, vector::flag::FlagSearch, Command, Context,
-    Flag,
+    crate_name, crate_version, done, flags, license, result, vector::flag::FlagSearch, Command,
+    Context, Flag,
 };
 
 use crate::pwgen;
@@ -47,10 +47,10 @@ pub fn new() -> Command {
 
 fn act(cmd: Command, ctx: Context) -> action_result!() {
     checks!(cmd, ctx, [error, help, version, license]);
-    result!(cmd, ctx)
+    result!(cmd.action(parse_ctx_and_run), ctx)
 }
 
-pub fn parse_ctx_and_run(cmd: Command, ctx: Context) {
+pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
     let l = {
         let lf = cmd.l_flags.find("lenght").unwrap();
         match ctx
@@ -104,4 +104,6 @@ pub fn parse_ctx_and_run(cmd: Command, ctx: Context) {
     for password in password_list {
         println!("{}\r\n", password);
     }
+
+    done!()
 }
