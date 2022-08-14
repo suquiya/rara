@@ -1,7 +1,7 @@
 use combu::{
     action_result, alias, checks, commands, copyright, crate_authors, crate_description,
-    crate_name, crate_version, done, flags, license, result, vector::flag::FlagSearch, Command,
-    Context, Flag,
+    crate_name, crate_version, done, flags, license, vector::flag::FlagSearch, Command, Context,
+    Flag,
 };
 
 use crate::pwgen;
@@ -23,7 +23,7 @@ pub fn new() -> Command {
                 [number]=>[>int?7,="password number option. default: 7",-n]
             ],
             [
-                [include]=>[>String?"d",="chooses chars indicate type password include. Types are alphabet(a),number(n),symbol(s) and default(d). You can specify multiple chars(ex: an). default=ans",-i]
+                [include]=>[>String,="chooses chars indicate type password include. Types are alphabet(a),number(n),symbol(s) and default(d). You can specify multiple chars(ex: an). default=ans",-i,?"d"]
             ],
             [
                 [exclude]=>[
@@ -47,12 +47,12 @@ pub fn new() -> Command {
 
 fn act(cmd: Command, ctx: Context) -> action_result!() {
     checks!(cmd, ctx, [error, help, version, license]);
-    result!(cmd.action(parse_ctx_and_run), ctx)
+    parse_ctx_and_run(cmd, ctx)
 }
 
 pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
     let l = {
-        let lf = cmd.l_flags.find("lenght").unwrap();
+        let lf = cmd.l_flags.find("length").unwrap();
         match ctx
             .get_flag_value_of(&lf.name, &cmd)
             .unwrap()
@@ -101,9 +101,11 @@ pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
 
     let password_list = pwgen::pwgen(l, n, &include_chars);
 
+    println!("---generated passwords begin---");
     for password in password_list {
-        println!("{}\r\n", password);
+        println!("{}", password);
     }
+    println!("---generated passwords end---");
 
     done!()
 }
