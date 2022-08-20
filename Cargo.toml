@@ -1,6 +1,6 @@
 [package]
 name = "rara"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["suquiya"]
 description = "Rara is a password generator."
 license="MIT"
