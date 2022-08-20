@@ -1,6 +1,17 @@
 # rara
 
-Rara is a password generator(WIP). This is an also sample project using [combu](https://github.com/suquiya/combu).
+Rara is a password generator. This is also an sample project using [combu](https://github.com/suquiya/combu).
+
+# Installation
+
+Rara exists on crates.io.
+You can use rara with cargo install command.
+
+```
+cargo install rara
+```
+
+Of course, you can clone this repository and build and use.
 
 # CONTRIBUTING
 

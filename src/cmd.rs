@@ -17,10 +17,10 @@ pub fn new() -> Command {
         "rara [OPTIONS]".into(),
         flags![
             [
-                [length]=>[>int?20,="password length option. default: 20",-l]
+                [length]=>[>int?20,="password length option. default: 20",-l,--len]
             ],
             [
-                [number]=>[>int?7,="password number option. default: 7",-n]
+                [number]=>[>int?7,="password number option. default: 7",-n,--num]
             ],
             [
                 [include]=>[>String,="chooses chars indicate type password include. Types are alphabet(a),number(n),symbol(s) and default(d). You can specify multiple chars(ex: an). default=ans",-i,?"d"]
