@@ -1,7 +1,7 @@
 use combu::{
     action_result, alias, checks, commands, copyright, crate_authors, crate_description,
     crate_name, crate_version, done, flags, license, vector::flag::FlagSearch, Command, Context,
-    Flag,
+    Flag, FlagValue,
 };
 
 use crate::pwgen;
@@ -97,7 +97,23 @@ pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
         x => x,
     };
 
-    let include_chars: Vec<char> = include_str.chars().collect();
+    let include_chars: Vec<char> = match ctx.get_inputted_local_flag_value_of("exclude") {
+        None | Some(FlagValue::None) => include_str.chars().collect(),
+        Some(FlagValue::String(val)) if val.is_empty() => include_str.chars().collect(),
+        Some(ex) => {
+            let ex = ex.get_string();
+            include_str.chars().filter(|c| !ex.contains(*c)).collect()
+        }
+    };
+
+    if include_chars.is_empty() {
+        println!("No char can use in password!\r\n");
+        println!(
+            "{}",
+            combu::command::presets::func::help_tablize_with_alias_dedup(&cmd, &ctx)
+        );
+        return done!();
+    }
 
     let password_list = pwgen::pwgen(l, n, &include_chars);
 
