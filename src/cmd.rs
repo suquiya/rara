@@ -1,7 +1,7 @@
 use combu::{
     action_result, alias, checks, commands, copyright, crate_authors, crate_description,
-    crate_name, crate_version, done, flags, license, vector::flag::FlagSearch, Command, Context,
-    Flag, FlagValue,
+    crate_name, crate_version, done, flags, license, output_help, vector::flag::FlagSearch,
+    Command, Context, Flag, FlagValue,
 };
 
 use crate::pwgen;
@@ -108,10 +108,7 @@ pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
 
     if include_chars.is_empty() {
         println!("No char can use in password!\r\n");
-        println!(
-            "{}",
-            combu::command::presets::func::help_tablize_with_alias_dedup(&cmd, &ctx)
-        );
+        output_help!(&cmd, &ctx);
         return done!();
     }
 
