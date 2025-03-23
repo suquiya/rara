@@ -5,6 +5,9 @@ authors = ["suquiya"]
 description = "Rara is a password generator."
 license = "MIT"
 categories = ["command-line-utilities"]
+documentation = "https://docs.rs/rara/"
+repository = "https://github.com/suquiya/rara"
+homepage = "https://github.com/suquiya/rara"
 edition = "2024"
 
 
