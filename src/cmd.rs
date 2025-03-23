@@ -73,9 +73,16 @@ pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
             _ => nf.default_value.get_int_unwrap(),
         }
     } as usize;
-    let include_str = match ctx.get_flag_value_of("custom", &cmd).unwrap().get_string() {
+    let include_str = match ctx
+        .get_flag_value_of("custom", &cmd)
+        .unwrap()
+        .get_string_value()
+    {
         x if x.is_empty() => {
-            let include = ctx.get_flag_value_of("include", &cmd).unwrap().get_string();
+            let include = ctx
+                .get_flag_value_of("include", &cmd)
+                .unwrap()
+                .get_string_value();
             if include.contains('d') {
                 String::from(pwgen::str_list::get_alphabets())
                     + pwgen::str_list::get_numbers()
@@ -101,7 +108,7 @@ pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
         None | Some(FlagValue::None) => include_str.chars().collect(),
         Some(FlagValue::String(val)) if val.is_empty() => include_str.chars().collect(),
         Some(ex) => {
-            let ex = ex.get_string();
+            let ex = ex.get_string_value();
             include_str.chars().filter(|c| !ex.contains(*c)).collect()
         }
     };
