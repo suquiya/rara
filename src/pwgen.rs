@@ -15,14 +15,14 @@ pub fn pwgen(length: usize, number: usize, use_chars: &[char]) -> Vec<String> {
 
 pub mod str_list {
     pub fn get_alphabets<'a>() -> &'a str {
-        return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     }
 
     pub fn get_symbols<'a>() -> &'a str {
-        return "@=-?!#$%&'()~^|/\\_<>,.:;+[]{}\"";
+        "@=-?!#$%&'()~^|/\\_<>,.:;+[]{}\""
     }
 
     pub fn get_numbers<'a>() -> &'a str {
-        return "0123456789";
+        "0123456789"
     }
 }

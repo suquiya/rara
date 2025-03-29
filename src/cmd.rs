@@ -1,7 +1,7 @@
 use combu::{
-    action_result, alias, checks, commands, copyright, crate_authors, crate_description,
-    crate_name, crate_version, done, flags, license, output_help, vector::flag::FlagSearch,
-    Command, Context, Flag, FlagValue,
+    Command, Context, Flag, FlagValue, action_result, alias, checks, commands, copyright,
+    crate_authors, crate_description, crate_name, crate_version, done, flags, license, output_help,
+    vector::flag::FlagSearch,
 };
 
 use crate::pwgen;
@@ -90,13 +90,13 @@ pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
             } else {
                 let mut str = String::new();
                 if include.contains('a') {
-                    str = str + pwgen::str_list::get_alphabets();
+                    str += pwgen::str_list::get_alphabets();
                 }
                 if include.contains('n') {
-                    str = str + pwgen::str_list::get_numbers();
+                    str += pwgen::str_list::get_numbers();
                 }
                 if include.contains('s') {
-                    str = str + pwgen::str_list::get_symbols();
+                    str += pwgen::str_list::get_symbols();
                 }
                 str
             }
