@@ -123,7 +123,7 @@ pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
 
     println!("---generated passwords begin---");
     for password in password_list {
-        println!("{}", password);
+        println!("{password}");
     }
     println!("---generated passwords end---");
 
