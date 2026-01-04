@@ -75,7 +75,7 @@ jobs:
         shell: bash
         run: |
           name="${{ steps.project.outputs.name }}"
-          archive_name="${name}_${{ matrix.os }}_${{ matrix.arch }}.tar.gz"
+          archive_name="${name}_${{ matrix.target}}.tar.gz"
           tar -czvf "$archive_name" -C target/release "$name"
           echo "archive_name=$archive_name" >> "$GITHUB_ENV"
 
@@ -84,7 +84,7 @@ jobs:
         shell: pwsh
         run: |
           $name = "${{ steps.project.outputs.name }}"
-          $archiveName = "${name}_${{ matrix.os }}_${{ matrix.arch }}.zip"
+          $archiveName = "${name}_${{ matrix.target}}.zip"
           Compress-Archive -Path "target/release/${name}.exe" -DestinationPath $archiveName
           echo "archive_name=$archiveName" >> $env:GITHUB_ENV
 
