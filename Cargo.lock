@@ -10,9 +10,9 @@ checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 
 [[package]]
 name = "combu"
-version = "1.5.1"
+version = "1.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a199a85efc81b6e4a3ed51f608196c481723cdefd4f9f659fa83cc947bc79dcd"
+checksum = "1a44304102b03a2ca0915be781aae55bf172d0e7b6cc7a0553f95a88b963badc"
 
 [[package]]
 name = "getrandom"
