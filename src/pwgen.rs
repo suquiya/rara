@@ -1,4 +1,4 @@
-use rand::Rng;
+use rand::RngExt;
 
 pub fn pwgen(length: usize, number: usize, use_chars: &[char]) -> Vec<String> {
     let mut rng = rand::rng();

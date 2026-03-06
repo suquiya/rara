@@ -1,4 +1,4 @@
-# based on: https://github.com/skanehira/rust-cli-template/blob/main/.github/workflows/release.yaml(LICENSE: The MIT License (MIT) - Copyright (c) 2025 skanehira https://github.com/skanehira/rust-cli-template/blob/main/LICENSE)
+# based on: https://github.com/skanehira/rust-cli-template/blob/main/.github/workflows/release.yaml (LICENSE: The MIT License (MIT) - Copyright (c) 2025 skanehira https://github.com/skanehira/rust-cli-template/blob/main/LICENSE)
 
 name: Release
 on:
@@ -44,7 +44,7 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup sccache
         uses: mozilla-actions/sccache-action@v0.0.9
@@ -56,7 +56,7 @@ jobs:
           echo "RUSTC_WRAPPER=sccache" >> "$GITHUB_ENV"
 
       - name: Setup Rust
-        uses: actions-rust-lang/setup-rust-toolchain@1780873c7b576612439a134613cc4cc74ce5538c # v1.15.2
+        uses: actions-rust-lang/setup-rust-toolchain@a0b538fa0b742a6aa35d6e2c169b4bd06d225a98 # v1.15.3
         with:
           rustflags: ""
 
@@ -89,7 +89,7 @@ jobs:
           echo "archive_name=$archiveName" >> $env:GITHUB_ENV
 
       - name: Upload artifact
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: ${{ steps.project.outputs.name }}_${{ matrix.os }}_${{ matrix.arch }}
           path: ${{ env.archive_name }}
@@ -101,12 +101,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
       - name: Download all artifacts
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
         with:
           path: artifacts
           merge-multiple: true
