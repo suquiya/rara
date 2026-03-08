@@ -4,6 +4,7 @@ Rara is a password generator. This is also an sample project using [combu](https
 
 # Installation
 
+## via cargo install
 Rara exists on crates.io.
 You can use rara with cargo install command.
 
@@ -11,7 +12,21 @@ You can use rara with cargo install command.
 cargo install rara
 ```
 
+## Download Binary
+You can download binary from [releases](https://github.com/suquiya/rara/releases).
+
+## via suquiya's scoop bucket
+You can install rara via scoop by adding suquiya's scoop bucket.
+
+```
+scoop bucket add suquiya_bucket https://github.com/suquiya/suquiya_bucket
+scoop install rara
+```
+
+
+## Manual Build
 Of course, you can clone this repository and build and use.
+
 
 # CONTRIBUTING
 
