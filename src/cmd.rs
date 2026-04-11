@@ -6,6 +6,7 @@ use combu::{
 
 use crate::pwgen;
 
+/// Returns a new `Command` for the Rara command-line interface.
 pub fn new() -> Command {
     Command::with_all_field(
         crate_name!().into(),
@@ -50,6 +51,7 @@ fn act(cmd: Command, ctx: Context) -> action_result!() {
     parse_ctx_and_run(cmd, ctx)
 }
 
+/// Parses the argument context and runs the command.
 pub fn parse_ctx_and_run(cmd: Command, ctx: Context) -> action_result!() {
     let l = {
         let lf = cmd.l_flags.find("length").unwrap();
