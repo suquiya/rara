@@ -12,5 +12,5 @@ edition = "2024"
 
 
 [dependencies]
-combu = "1.6.0"
+combu = "1.6.1"
 rand = "0.10.1"
